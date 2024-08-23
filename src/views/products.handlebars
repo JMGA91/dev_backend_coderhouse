@@ -1,0 +1,77 @@
+<div class="container">
+  <nav>
+    <ul class="nav_list">
+      <li class="nav__item">
+        <a class="nav_link" href="/products">Products</a>
+      </li>
+      <li class="nav__item">
+        <a class="nav_link" href="/realtimeproducts">Post</a>
+      </li>
+      <li class="nav__item">
+        <a class="nav_link" href="/chat">Help!</a>
+      </li>
+      <li class="nav__item">
+        <a class="nav_link" href="/mockingproducts">Extras</a>
+      </li>
+      <li class="nav__item">
+        <a class="nav_link" href="/cart?cid={{user.cartId}}">Cart</a>
+      </li>
+      <li class="nav__item">
+        <a class="nav_link" href="/api/session/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="box">
+    <h1>Productos</h1>
+    <div class="products-box">
+      {{#each products.docs}}
+        <div class="product-card">
+          <h3>{{this.title}}</h3>
+          <hr />
+          <p>Categoria: {{this.category}}</p>
+          <p>Descripción: {{this.description}}</p>
+          <p>Precio: $ {{this.price}}</p>
+          <img
+    src="https://i.ebayimg.com/images/g/swoAAOSwCm9kEMTF/s-l1200.webp"
+    alt="Welcome Image"
+  />
+
+
+          <!-- Quantity Display -->
+          <span class="item-count" data-product-id="{{this._id}}">0</span>
+
+
+          <!-- Add to Cart Button -->
+          <button
+            data-product-id="{{this._id}}"
+            data-cart-id="{{../cartId}}"
+            class="add-to-cart-button"
+          >
+            Add to Cart
+          </button>
+
+
+          <!-- Delete Product Button -->
+          <button
+            type="button"
+            class="delete-product-button"
+            data-product-id="{{this._id}}"
+            data-cart-id="{{../cartId}}"
+          >
+            Delete
+          </button>
+        </div>
+      {{/each}}
+    </div>
+    <div class="paginate">
+      {{#if products.prevPage}}
+        <a href="/products?page={{products.prevPage}}" class="prev">previous</a>
+      {{/if}}
+      {{#if products.nextPage}}
+        <a href="/products?page={{products.nextPage}}" class="next">next</a>
+      {{/if}}
+    </div>
+  </div>
+</div>
+<script src="/js/products.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

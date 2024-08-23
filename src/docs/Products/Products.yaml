@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: Product API
+  description: API for managing products, including CRUD operations and pagination.
+  version: 1.0.0
+servers:
+  - url: https://desafiocomplementario-backend.onrender.com/api
+    description: Development server
+
+tags:
+  - name: Product
+    description: Operations related to products
+
+paths:
+  /products:
+    get:
+      tags:
+        - Product
+      summary: Retrieve all products with optional filters and pagination
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The number of products to return
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: The page number to return
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: Sort order for products
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Query string for filtering products
+      responses:
+        "200":
+          description: A paginated list of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+                  totalDocs:
+                    type: integer
+                    description: Total number of products
+                  limit:
+                    type: integer
+                    description: Number of products per page
+                  page:
+                    type: integer
+                    description: Current page number
+                  totalPages:
+                    type: integer
+                    description: Total number of pages
+
+    post:
+      tags:
+        - Product
+      summary: Create a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        "201":
+          description: The created product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+  /products/{productId}:
+    get:
+      tags:
+        - Product
+      summary: Retrieve a specific product by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The requested product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+    put:
+      tags:
+        - Product
+      summary: Update a specific product by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdate"
+        required: true
+      responses:
+        "200":
+          description: The updated product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+    delete:
+      tags:
+        - Product
+      summary: Delete a specific product by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Confirmation of deletion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acknowledged:
+                    type: boolean
+                  deletedCount:
+                    type: integer
+                example:
+                  acknowledged: true
+                  deletedCount: 1
+
+components:
+  schemas: Product
