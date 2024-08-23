@@ -22,6 +22,9 @@ import swaggerUiExpress from "swagger-ui-express";
 import path from 'path';
 
 
+console.log(`dirname*: `, __dirname);
+
+
 //dotenv.config({ path: "./src/mongo.env" });
 //dotenv.config();
 
