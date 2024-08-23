@@ -21,7 +21,7 @@ export default class UserService {
     console.log("registerUser!");
 
     console.log("user.email: ", user.email);
-    console.log("isValidPassword: ", isValidPassword(user, "admin12345"));
+    // console.log("isValidPassword: ", isValidPassword(user, "admin12345"));
 
     if (
       user.email == "admin@flameshop.com" &&
@@ -34,9 +34,6 @@ export default class UserService {
       await result.save();
       return result;
     }
-
-    console.log("registerUser after if!");
-    
     return await this.userRepository.createUser(user);
   }
 
