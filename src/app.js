@@ -50,9 +50,16 @@ app.set("view engine", "handlebars");
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../../public")));
+// app.use(express.static(__dirname + "/../public"));
+
 app.use("/js", express.static(path.join(__dirname, "public", "js")));
 app.use("/css", express.static(path.join(__dirname, "public", "css")));
+
+console.log(`path: `, path.join(__dirname, "public", "css"));
+
 app.use(cookieParser());
 
 // Use express-session before passport.session()
