@@ -74,7 +74,7 @@ router.get(
 router.get(
   "/products",
   passport.authenticate("jwt", { session: false }),
-  auth(["user", "premium"]),
+  auth(["user", "premium", "admin"]),
   async (req, res) => {
     let { limit = 5, page = 1 } = req.query;
     const cartId = req.user.user.cart;
