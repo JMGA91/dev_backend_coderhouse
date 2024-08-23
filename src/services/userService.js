@@ -18,18 +18,25 @@ export default class UserService {
   }
 
   async registerUser(user) {
+    console.log("registerUser!");
+
+    console.log("user.email: ", user.email);
+    console.log("isValidPassword: ", isValidPassword(user, "admin12345"));
+
     if (
       user.email == "admin@flameshop.com" &&
       isValidPassword(user, "admin12345")
     ) {
       console.log("Creating admin user...");
-      console.log("isValidPassword: ", isValidPassword(user, "admin12345"));
       
       const result = await this.userRepository.createUser(user);
       result.role = "admin";
       await result.save();
       return result;
     }
+
+    console.log("registerUser after if!");
+    
     return await this.userRepository.createUser(user);
   }
 
