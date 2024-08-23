@@ -21,7 +21,7 @@ function updateProductList(data) {
   $(".products-box").innerHTML = "";
 
   let html = "";
-  data.docs.forEach((product) => {
+  data.forEach((product) => {
     html += `<div class="product-card">
                 <h3>${product.title}</h3>
                 <hr>
