@@ -22,6 +22,9 @@ export default class UserService {
       user.email == "admin@flameshop.com" &&
       isValidPassword(user, "admin12345")
     ) {
+      console.log("Creating admin user...");
+      console.log("isValidPassword: ", isValidPassword(user, "admin12345"));
+      
       const result = await this.userRepository.createUser(user);
       result.role = "admin";
       await result.save();

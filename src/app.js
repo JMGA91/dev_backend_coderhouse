@@ -21,10 +21,6 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
 import path from 'path';
 
-
-console.log(`dirname*: `, __dirname);
-
-
 //dotenv.config({ path: "./src/mongo.env" });
 //dotenv.config();
 
@@ -51,14 +47,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "../../public")));
-// app.use(express.static(__dirname + "/../public"));
-
-app.use("/js", express.static(path.join(__dirname, "public", "js")));
-app.use("/css", express.static(path.join(__dirname, "public", "css")));
-
-console.log(`path: `, path.join(__dirname, "public", "css"));
 
 app.use(cookieParser());
 
