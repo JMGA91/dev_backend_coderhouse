@@ -20,17 +20,19 @@ socket.on("publishProducts", (data) => {
 function updateProductList(data) {
   // $(".products-box").innerHTML = "";
 
+  const objectToLoop = (data.docs) ? data.docs : data;
   // let html = "";
   let html = document.createElement("div");
   html.setAttribute("class", "product-card");
 
-  data.forEach((product) => {
+  objectToLoop.forEach((product) => {
     html.innerHTML = `
       <h3>${product.title}</h3>
       <hr>
       <p>Categoria: ${product.category}</p>
       <p>Descripción: ${product.description}</p>
       <p>Precio: $ ${product.price}</p>
+      <img src="https://i.ebayimg.com/images/g/swoAAOSwCm9kEMTF/s-l1200.webp" alt="Welcome Image">
       <button id="button-delete" onclick="deleteProduct('${product._id}')">Eliminar</button>
     `;
   });
