@@ -18,21 +18,25 @@ socket.on("publishProducts", (data) => {
 });
 
 function updateProductList(data) {
-  $(".products-box").innerHTML = "";
+  // $(".products-box").innerHTML = "";
 
-  let html = "";
+  // let html = "";
+  let html = document.createElement("div");
+  html.setAttribute("class", "product-card");
+
   data.forEach((product) => {
-    html += `<div class="product-card">
-                <h3>${product.title}</h3>
-                <hr>
-                <p>Categoria: ${product.category}</p>
-                <p>Descripción: ${product.description}</p>
-                <p>Precio: $ ${product.price}</p>
-                <button id="button-delete" onclick="deleteProduct('${product._id}')">Eliminar</button>
-            </div>`;
+    html.innerHTML = `
+      <h3>${product.title}</h3>
+      <hr>
+      <p>Categoria: ${product.category}</p>
+      <p>Descripción: ${product.description}</p>
+      <p>Precio: $ ${product.price}</p>
+      <button id="button-delete" onclick="deleteProduct('${product._id}')">Eliminar</button>
+    `;
   });
 
-  $(".products-box").innerHTML = html;
+  // $(".products-box").innerHTML = html;
+  document.querySelector(".products-box").prepend(html);
 
   // Update pagination links
   const paginationHtml = `
